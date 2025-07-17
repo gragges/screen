@@ -4,7 +4,7 @@ const { v4: uuid } = require('uuid');
 const fs = require('fs');
 // Main screenshot function
 const screenshot = async (req, res) => {
-    const url = "https://www.bankier.pl/gielda/notowania/akcje";
+    const url = "https://jsonplaceholder.typicode.com/";
     if (!url) {
         return res.status(400).json({ message: 'URL is required' });
     }

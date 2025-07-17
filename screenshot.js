@@ -4,7 +4,7 @@ const { v4: uuid } = require('uuid');
 const fs = require('fs');
 // Main screenshot function
 const screenshot = async (req, res) => {
-    const url = req.query.url;
+    const url = "https://www.bankier.pl/gielda/notowania/akcje";
     if (!url) {
         return res.status(400).json({ message: 'URL is required' });
     }
@@ -16,7 +16,7 @@ const screenshot = async (req, res) => {
             executablePath: process.env.CHROME_PATH || '/opt/bin/chromium',
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
-        const url = "https://www.bankier.pl/gielda/notowania/akcje";
+        
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'networkidle2' });
         await page.setViewport({ width: 1920, height: 1080 });
@@ -31,4 +31,4 @@ const screenshot = async (req, res) => {
         if (browser) await browser.close();
     }
 };
-module.exports = screenshot;
+module.exports = {screenshot};

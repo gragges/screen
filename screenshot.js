@@ -11,8 +11,9 @@ const screenshot = async (req, res) => {
     }
     let browser;
     try {
+        console.log(chromePath)
         // Launch Puppeteer with specific Chrome executable path and options
-        browser = await puppeteer.launch({
+       /* browser = await puppeteer.launch({
             ignoreHTTPSErrors: true,
             executablePath: process.env.CHROME_PATH || chromePath,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -34,7 +35,7 @@ const screenshot = async (req, res) => {
         })
     
 });
-        console.log(dane);
+        console.log(dane);*/
         //const fileName = `${uuid()}.png`;
         //const screenshotPath = path.join(__dirname, '..', 'public', fileName);
        // await page.screenshot({ path: screenshotPath });

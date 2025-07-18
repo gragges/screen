@@ -3,6 +3,7 @@ const path = require('path');
 const { v4: uuid } = require('uuid');
 const fs = require('fs');
 const chromePath = require('puppeteer').executablePath();
+console.log(chromePath)
 // Main screenshot function
 const screenshot = async (req, res) => {
     const url = "https://www.bankier.pl/gielda/notowania/akcje";

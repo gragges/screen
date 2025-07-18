@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const { v4: uuid } = require('uuid');
 const fs = require('fs');
+const chromePath = require('puppeteer').executablePath();
 // Main screenshot function
 const screenshot = async (req, res) => {
     const url = "https://jsonplaceholder.typicode.com/";
@@ -13,7 +14,7 @@ const screenshot = async (req, res) => {
         // Launch Puppeteer with specific Chrome executable path and options
         browser = await puppeteer.launch({
             ignoreHTTPSErrors: true,
-            executablePath: process.env.CHROME_PATH || '/opt/bin/chromium',
+            executablePath: process.env.CHROME_PATH || chromePath,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
         

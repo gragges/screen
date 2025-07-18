@@ -5,7 +5,7 @@ const fs = require('fs');
 const chromePath = require('puppeteer').executablePath();
 // Main screenshot function
 const screenshot = async (req, res) => {
-    const url = "https://jsonplaceholder.typicode.com/";
+    const url = "https://www.bankier.pl/gielda/notowania/akcje";
     if (!url) {
         return res.status(400).json({ message: 'URL is required' });
     }
@@ -21,10 +21,24 @@ const screenshot = async (req, res) => {
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'networkidle2' });
         await page.setViewport({ width: 1920, height: 1080 });
-        const fileName = `${uuid()}.png`;
-        const screenshotPath = path.join(__dirname, '..', 'public', fileName);
-        await page.screenshot({ path: screenshotPath });
-        res.json({ screenshotPath: `/image/${fileName}` });
+        const dane = await page.evaluate(()=>{
+        const zmienna = document.querySelectorAll('.colWalor.textNowrap');
+        //const zmienna = document.querySelectorAll('.colLiczbaTransakcji');
+        
+        return Array.from(zmienna).map((walor)=>{
+            const tytul=walor.innerText
+            //const transakcje=walor.getElementsByTagName('td').querySelectorAll('.colLiczbaTransakcji').innerText;
+            return tytul
+               
+            
+        })
+    
+});
+        console.log(dane);
+        //const fileName = `${uuid()}.png`;
+        //const screenshotPath = path.join(__dirname, '..', 'public', fileName);
+       // await page.screenshot({ path: screenshotPath });
+       // res.json({ screenshotPath: `/image/${fileName}` });
     } catch (err) {
         console.error('Error capturing screenshot:', err);
         res.status(500).json({ error: 'Failed to capture screenshot' });
